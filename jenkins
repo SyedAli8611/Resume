@@ -1,0 +1,38 @@
+pipeline {
+     agent any
+
+	environment {	
+		DOCKERHUB_CREDENTIALS=credentials('login-id')
+	}
+		
+    stages {
+        stage('SCM_Checkout') {
+            steps {
+                echo 'Perform SCM Checkout'
+                git 'https://github.com/SyedAli8611/Resume1.git'
+            }
+        }
+
+        stage('Docker Build') {
+            steps {
+                echo 'Perform Docker Build'
+				sh "docker build -t iamfaizanali/automate_image:${BUILD_NUMBER} ."
+				sh 'docker image list'
+            }
+        }
+        stage('Login to Dockerhub') {
+            steps {
+                echo 'Login to DockerHub'				
+				sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+                
+            }
+        }     
+
+        stage('Publish the Image to Dockerhub') {
+            steps {
+                echo 'Publish to DockerHub'
+				sh "docker push iamfaizanali/automate_image:${BUILD_NUMBER}"                
+            }
+        }
+    }
+}
