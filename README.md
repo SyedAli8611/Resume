@@ -21,4 +21,14 @@ stage('SCM_Checkout') {
         git 'https://github.com/SyedAli8611/Resume1.git'
     }
 }
+2. Docker Build
+This stage builds the Docker image using the Dockerfile in the repository.
+stage('Docker Build') {
+    steps {
+        echo 'Perform Docker Build'
+        sh "docker build -t iamfaizanali/automate_image:${BUILD_NUMBER} ."
+        sh 'docker image list'
+    }
+}
+
 
