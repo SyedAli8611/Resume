@@ -30,5 +30,14 @@ stage('Docker Build') {
         sh 'docker image list'
     }
 }
+3. Login to DockerHub
+In this stage, the pipeline logs into DockerHub using credentials stored in Jenkins.
+stage('Login to Dockerhub') {
+    steps {
+        echo 'Login to DockerHub'
+        sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+    }
+}
+
 
 
