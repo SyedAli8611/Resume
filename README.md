@@ -38,6 +38,13 @@ stage('Login to Dockerhub') {
         sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
     }
 }
-
+4. Publish the Image to DockerHub
+Finally, the pipeline publishes the Docker image to DockerHub.
+stage('Publish the Image to Dockerhub') {
+    steps {
+        echo 'Publish to DockerHub'
+        sh "docker push iamfaizanali/automate_image:${BUILD_NUMBER}"                
+    }
+}
 
 
