@@ -1,1 +1,1 @@
-# Resume1
+This repository contains a Jenkins pipeline for automating the build and deployment of a Docker image using an Nginx server. The process includes checking out the code from GitHub, building the Docker image, logging in to DockerHub, and publishing the image.
